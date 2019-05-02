@@ -38,20 +38,11 @@
 								<section>
                                     
                                     <p>
-										Online shopping has already become an important part of our everyday lives. While online retailing channels like 
-										Amazon, eBay and Taobao provide consumers with huge convenience, they also present golden opportunities for 
-										product manufacturers and consumer good companies as the volume of review data becomes abundant. As a data 
-										scientist working in the consumer product industry, I deal with review data a lot. In this blog, I would like to 
-										share my thoughts and observations on how to improve the visualization of review data to retrieve more insightful 
-										information.
+										According to the latest Internet Retailer analysis of industry data by the U.S. Commerce Department, consumers spent $517.36 billion online with U.S. merchants in 2018 - 15% more than the year prior. Many believe that online retailing sites and channels have already become people's top choice when it comes to shopping. While websites like Amazon.com provide consumers with huge convenience, they also present golden opportunities for product manufacturers and consumer good companies as the volume of review data becomes abundant. As a data scientist working in the consumer product industry, I deal with review data a lot. In this blog, I would like to share my thoughts and observations on how to improve the visualization of review data to retrieve more insightful information.
 									</p>
 									
                                     <p>
-										Data visualization is almost always the first layer of any data analysis. And there are many techniques and 
-										packages out there for us. However, when it comes to visualizing text data, our choices seem to be limited - 
-										bar charts, word clouds, and sometimes, word trees, all of which are based on the frequencies of word tokens. 
-										While these frequency-based visualization techniques are intuitive and easy-to-make, I found that they have 
-										two main drawbacks.
+										Data visualization is almost always the first layer of any kind of data analysis. Today, there are many techniques and packages out there for us to make astonishing charts and plots. However, when it comes to visualizing text data, our choices suddenly become limited -  bar charts, word clouds, and sometimes, word trees, all of which are based on the frequencies of word tokens. While these frequency-based visualization techniques are intuitive and easy-to-make, the information they provide is rarely satisfactory with two major drawbacks.
 									</p>
 
 									<h3>1. The lack of interpretability - many tokens with high frequency are hard to interpret</h3>
@@ -65,16 +56,16 @@
                                     </p>
 
                                     <p>
-											As an example, the plot above shows the top 15 most used terms (with stop-words like the, a, an, etc removed) in 
-											the Amazon review of my favorite product in household cleaning, the 
-											<a href="https://www.amazon.com/Clorox-Disinfecting-Wipes-Bleach-Cleaning/dp/B00IA6IBP2/
-											ref=sr_1_2_sspa?keywords=clorox+wipes+bleach+free&qid=1554506986&s=pantry&sr=8-2-spons&psc=1">Clorox disinfecting wipes.</a>  
-											While word or tokens like "t" are basically impossible to interpret in the first place, it is also tricky to understand 
-											customer feedback from tokens like “wipe", "get" and "one." What are they talking about exactly? Sometimes we could 
-											improve the results by adding additional stop-words dynamically (stop words based on product names and descriptions) or by 
-											choosing a better tokenizing algorithm, which could prevent tokens like "t" from appearing as popular terms (The 
-											token "t" is very likely a part of "don't" or "doesn't". The preprocessing algorithm treated it as a separate token 
-											after removing punctuation). However, it is hard to find a universal solution that makes every token interpretable.
+										As an example, the plot above shows the top 15 most used terms (with stop-words like the, a, an, etc removed) in 
+										the Amazon review of my favorite product in household cleaning, the 
+										<a href="https://www.amazon.com/Clorox-Disinfecting-Wipes-Bleach-Cleaning/dp/B00IA6IBP2/
+										ref=sr_1_2_sspa?keywords=clorox+wipes+bleach+free&qid=1554506986&s=pantry&sr=8-2-spons&psc=1">Clorox disinfecting wipes.</a>  
+										While word or tokens like "t" are basically impossible to interpret in the first place, it is also tricky to understand 
+										customer feedback from tokens like “wipe", "get" and "one." What are they talking about exactly? Sometimes we could 
+										improve the results by adding additional stop-words dynamically (stop words based on product names and descriptions) or by 
+										choosing a better tokenizing algorithm, which could prevent tokens like "t" from appearing as popular terms (The 
+										token "t" is very likely a part of "don't" or "doesn't". The preprocessing algorithm treated it as a separate token 
+										after removing punctuation). However, it is hard to find a universal solution that makes every token interpretable.
 									</p>
 									
 									<h3>2. The lack of context - Tokens in isolation sometimes result in ambiguity and superficial information.</h3>
@@ -96,20 +87,17 @@
 												<figcaption>Bi-gram</figcaption>
 										</figure>
 									</p>
-
-									
-											
+			
 									<h4>Additional Information</h4>
 
 									<p>
 										To gain more insights, we first need additional information on the reviews other than the text contents themselves. 
-										Based on my experience, I find Part-of-Speech (POS) of the reviews extremely helpful. Part-of-speech is a 
-										category to which a word is assigned in accordance with its syntactic functions i.e. Nouns, Verbs, Adjectives, 
-										etc. When we think about the user reviews towards a certain product together with the part-of-speech components 
-										of text, it shouldn’t be surprising that the terms or tokens which provide the most insightful information are 
-										very likely found as Nouns or Adjectives. Nouns help explain the “What” question (what are the consumer talking 
-										about the product, the subjects. It could be packaging, delivery, smell, etc), while adjectives help with the 
-										“what about” question. (What about packaging; what about delivery; what about the smell)
+										In my experience tackling text data, I find Part-of-Speech (POS) of the reviews extremely helpful. 
+									</p>
+
+									<p>
+										Part-of-speech is a category to which a word is assigned in accordance with its syntactic functions i.e. Nouns, Verbs, Adjectives, etc. When we think about the user reviews towards a certain product together with the part-of-speech components 
+										of text, it shouldn’t be surprising that the terms or tokens which provide the most insightful information are very likely found as Nouns or Adjectives. Nouns help explain the “What” question (what are the consumer talking about the product, the subjects. It could be packaging, delivery, smell, etc), while adjectives help with the “what about” question. (What about packaging; what about delivery; what about the smell)
 									</p>
 
 									<p>
@@ -157,7 +145,7 @@
 									</p>
 
 									<p>
-										Below, you can find the top 15 most popular nouns and adjectives for the Clorox wipes.
+										Below, you can find the top 15 most popular nouns and adjectives for the Clorox wipes I mentioned above. As you can see, comparing with the vanilla popular terms found above, the tokens we have in the charts below are now mostly interpretable. 
 										<div style="display:flex">
 											<div style="flex:1;padding-right:3px;">
 												<figure>
@@ -248,52 +236,62 @@
 									</p>
 
 									<p>
-										Lastly, this method I came up with is just a twick in visualizing text data with the goal of getting more valueable information from text through visualization. I hope it will help sparkle some thoughts and ideas when you encounter text data in the future. Thank you for reading through!
+										Lastly, this method I came up with is just a twick in visualizing text data with the goal of getting more valuable information from text through visualization. I hope you find it practical and it would be great if it helps sparkle some thoughts and ideas when you encounter text data in the future. Thank you very much for reading through!
 									</p>
 		
 									<div id="comments">
 										<h2>Comments</h2>
-										<div id="header">
-										  Want to leave a comment? Visit <a href="https://github.com/ALaughingHorse/ALaughingHorse.github.io/issues/1"> this post's issue page on GitHub </a> 
-										   you will need a github account.
-										</div>
+											<p>
+												Want to leave a comment? Visit <a href="https://github.com/ALaughingHorse/ALaughingHorse.github.io/issues/1"> this </a> post's issue page on GitHub. You will need a github account.
+											</p>
+
+										<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
+
+										<script type="text/javascript" src="http://datejs.googlecode.com/svn/trunk/build/date-en-US.js"></script>
+
+										<script type="text/javascript">
+											$("#post p").each( function(index) {
+											  if (index > 0 && $.trim($(this).text()).length > 0) {
+												$(this).attr("id", "par" + index.toString());
+												var html = $(this).html();
+												$(this).html(html + " <a href='#par" + index.toString() + "'>#</a>");
+											  }
+											});
+										</script>
+
+										<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+										<script type="text/javascript">
+											function loadComments(data) {
+												for (var i=0; i<data.length; i++) {
+													var cuser = data[i].user.login;
+													var cuserlink = "https://www.github.com/" + data[i].user.login;
+													var clink = "https://github.com/ALaughingHorse/ALaughingHorse.github.io/issues/1#issuecomment-" + data[i].url.substring(data[i].url.lastIndexOf("/")+1);
+													var cbody = data[i].body_html;
+													var cavatarlink = data[i].user.avatar_url;
+													var cdate = Date.parse(data[i].created_at).toString("yyyy-MM-dd HH:mm:ss");
+												
+													$("#comments").append("<div class='comment'><div class='commentheader'><div class='commentgravatar'>" + '<img src="' + cavatarlink + '" alt="" width="20" height="20">' + "</div><a class='commentuser' href=\""+ cuserlink + "\">" + cuser + "</a><a class='commentdate' href=\"" + clink + "\">" + cdate + "</a></div><div class='commentbody'>" + cbody + "</div></div>");
+												}
+											}
+
+											$.ajax("https://api.github.com/repos/ALaughingHorse/ALaughingHorse.github.io/issues/1/comments?per_page=100", {
+												headers: {
+													Accept: "application/vnd.github.full+json"},
+													dataType: "json",
+													success: function(msg){
+														loadComments(msg);
+												}
+											});
+										</script>
 									</div>
-									
-									<script type="text/javascript" src="http://datejs.googlecode.com/svn/trunk/build/date-en-US.js"></script>
-
-									<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-
-									<script type="text/javascript">
-										function loadComments(data) {
-											for (var i=0; i<data.length; i++) {
-												var cuser = data[i].user.login;
-												var cuserlink = "https://www.github.com/" + data[i].user.login;
-												var clink = "https://github.com/ALaughingHorse/ALaughingHorse.github.io/issues/1#issuecomment-" + data[i].url.substring(data[i].url.lastIndexOf("/")+1);
-												var cbody = data[i].body_html;
-												var cavatarlink = data[i].user.avatar_url;
-												var cdate = Date.parse(data[i].created_at).toString("yyyy-MM-dd HH:mm:ss");
-											
-												$("#comments").append("<div class='comment'><div class='commentheader'><div class='commentgravatar'>" + '<img src="' + cavatarlink + '" alt="" width="20" height="20">' + "</div><a class='commentuser' href=\""+ cuserlink + "\">" + cuser + "</a><a class='commentdate' href=\"" + clink + "\">" + cdate + "</a></div><div class='commentbody'>" + cbody + "</div></div>");
-											}
-										}
-
-										$.ajax("https://api.github.com/repos/ALaughingHorse/ALaughingHorse.github.io/issues/1/comments", {
-											headers: {Accept: "application/vnd.github.full+json"},
-											success: function(msg){
-											loadComments(msg);
-											}
-										});
-									</script>
-		<!-- Footer -->
-			<footer id="footer" class="wrapper alt">
-				<div class="inner">
-					<ul class="menu">
-						<li>&copy; All rights reserved.</li><li>Author: <a href="http://html5up.net">Marshal (Xiao) Ma</a></li>
-					</ul>
-				</div>
-			</footer>
+								</section>
+							</div>
+						</section>
+					</div>
 
 		<!-- Scripts -->
+			
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -301,6 +299,15 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; All rights reserved.</li><li>Author: Marshal Ma</li>
+					</ul>
+				</div>
+			</footer>
 
 	</body>
 </html>
