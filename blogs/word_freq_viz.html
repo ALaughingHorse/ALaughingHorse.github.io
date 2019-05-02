@@ -49,13 +49,13 @@
 
                                     <p>
                                         <figure>
-											<img src="../images/blog_imgs/unigram.png" alt=""/>
+											<img src="../images/blog_imgs/unigram.png" alt="" width="100%"/>
 											<figcaption>Top mentioned terms for Clorox Wipes</figcaption>
 											<cite></cite>
                                         </figure>
                                     </p>
 
-                                    <p>
+                         <p>
 										As an example, the plot above shows the top 15 most used terms (with stop-words like the, a, an, etc removed) in 
 										the Amazon review of my favorite product in household cleaning, the 
 										<a href="https://www.amazon.com/Clorox-Disinfecting-Wipes-Bleach-Cleaning/dp/B00IA6IBP2/
@@ -83,7 +83,7 @@
 										frequency based visualizations. So how can we improve the frequency based visualizations so that it can get us more 
 										insights?
 										<figure>
-												<img src="../images/blog_imgs/bi_gram.png" alt="">
+												<img src="../images/blog_imgs/bi_gram.png" alt="" width="100%">
 												<figcaption>Bi-gram</figcaption>
 										</figure>
 									</p>
@@ -146,20 +146,14 @@
 
 									<p>
 										Below, you can find the top 15 most popular nouns and adjectives for the Clorox wipes I mentioned above. As you can see, comparing with the vanilla popular terms found above, the tokens we have in the charts below are now mostly interpretable. 
-										<div style="display:flex">
-											<div style="flex:1;padding-right:3px;">
 												<figure>
-														<img src="../images/blog_imgs/top_nouns.png" height="400" width="600">
+														<img src="../images/blog_imgs/top_nouns.png" height="auto" width = '90%'>
 														<figcaption>Top Nouns<figcaption>
 												</figure>
-											</div>
-											<div style="flex:1;padding-left:3px;">
 												<figure>
-													<img src="../images/blog_imgs/top_adjs.png" height="400" width="600">
+													<img src="../images/blog_imgs/top_adjs.png" height="auto" width="90%">
 													<figcaption>Top Adjectives</figcaption>
 												</figure>
-											</div>
-										</div>
 									</p>
 
 									<h4>Related Term Search</h4>
@@ -178,17 +172,17 @@
 									</p>
 									<p>
 										I will use the following review as an example to help illustrate my approach:
-										<img src="../images/blog_imgs/example3.png" alt="" width="1100">
+										<img src="../images/blog_imgs/example3.png" alt="" width="100%">
 									</p>
 
 									<p>
 										Below is the tokenized version of the reivew:
-										<img src="../images/blog_imgs/tokenized.png" alt="" width="1100">
+										<img src="../images/blog_imgs/tokenized.png" alt="" width="100%">
 									</p>
 
 									<p>
 										Below is the review tagged with Part-of-Speech. Here I used the pos_tag function under the nltk (3.2.4) package in Python 3.6.2:
-										<img src="../images/blog_imgs/tagged.png" alt="" width="1100"> 
+										<img src="../images/blog_imgs/tagged.png" alt="" width="100%"> 
 									</p>
 
 									<p>
@@ -201,29 +195,29 @@
 
 									<p>
 										1. Identify the position of the target term (highlighted in yellow)
-										<img src="../images/blog_imgs/example3.png" alt="" width="1100">
+										<img src="../images/blog_imgs/example3.png" alt="" width="100%">
 									</p>
 
 									<p>
 										2. Find the nearest terms with the same POS tag as the target term. Call them the “boundary terms” (highlighted in blue). In this case, since “price” is a noun, the boundary terms will be the nearest nouns.
-										<img src="../images/blog_imgs/example2.png" alt="" width="1100"\> 
+										<img src="../images/blog_imgs/example2.png" alt="" width="100%"\> 
 									</p>
 
 									<p>
 										3. Find all the adjectives within the boundary terms and save them into a list
-										<img src="../images/blog_imgs/example1.png" alt="" width="1100"\> 
+										<img src="../images/blog_imgs/example1.png" alt="" width="100%"\> 
 									</p>
 
 									<p>
 										Then we repeat the same process above with “price” as the target term for all the reviews. Eventually, we will have a list of adjectives that are potentially “related” with the term <b>price</b>. In this way, I am able to get the top-15 related adjectives as below:
 
-										<img src="../images/blog_imgs/related_1.png" alt="">
+										<img src="../images/blog_imgs/related_1.png" alt="" width="100%">
 									</p>
 
 									<p>
 										Terms like “good” and “great” are extremely popular. Which is actually true as we can find lots of reviews on Amazon that says “good price” and “great price.” 
 										This is not a complicated approach, but it seems to be very effective in helping us deepen the level of information we get. On the other hand, as in the plot above, reviewers use the term “great” a lot as an adjective, and I would like to know what is great about this product, I can repeat the process above with minor changes to obtain the following result:
-										<img src="../images/blog_imgs/related_2.png" alt="">
+										<img src="../images/blog_imgs/related_2.png" alt="" width="100%">
 									</p>
 
 									<p>
