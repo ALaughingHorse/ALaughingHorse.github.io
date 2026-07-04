@@ -1,33 +1,141 @@
-Hyperspace by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+ALaughingHorse
+===============
 
+This is a lightweight static personal site. GitHub Pages serves the generated
+HTML files directly, so there is no runtime backend.
 
-So I've had the wireframe for this particular design kicking around for some time, but with all
-the other interesting (and in some cases, semi-secret) projects I've been working on it took me
-a little while to get to actually designing and coding it. Fortunately, things have eased up
-enough for me to finaly get around to it, so I'm happy to introduce Hyperspace: a fun, blocky,
-one-page design with a lot of color, a bit of animation, and an additional "generic" page template
-(because hey, even one-page sites usually need an interior page or two). Hope you dig it :)
+Editing content
+---------------
 
-Demo images* courtesy of Unsplash, a radtastic collection of CC0 (public domain) images
-you can use for pretty much whatever.
+Homepage, project, and reading content lives in:
 
-(* = not included)
+  content/site.json
 
-AJ
-aj@lkn.io | @ajlkn
+Blog posts live in folders under:
 
+  content/posts/
 
-Credits:
+Each post has an index.md file and can keep images beside it:
 
-	Demo Images:
-		Unsplash (unsplash.com)
+  content/posts/my-post/
+    index.md
+    images/
+      chart.png
 
-	Icons:
-		Font Awesome (fontawesome.io)
+Use Markdown image syntax inside a post:
 
-	Other:
-		jQuery (jquery.com)
-		Scrollex (github.com/ajlkn/jquery.scrollex)
-		Responsive Tools (github.com/ajlkn/responsive-tools)
+  ![Chart caption](images/chart.png)
+
+Then regenerate the public HTML files:
+
+  ruby scripts/build.rb
+
+If npm is available, this also works:
+
+  npm run build
+
+Local composer
+--------------
+
+To compose posts in a browser on your own machine:
+
+  ruby scripts/admin_server.rb
+
+Then open:
+
+  http://127.0.0.1:4567/
+
+The composer is local-only. It is not part of the published website and does not
+provide public login. It writes:
+
+  content/posts/<slug>/index.md
+  content/posts/<slug>/images/
+
+and then runs:
+
+  ruby scripts/build.rb
+
+After reviewing the generated page, commit and push the changed files to publish.
+
+The generated pages are:
+
+  index.html
+  blogCollection.html
+  projects.html
+  readings.html
+  posts/<slug>/index.html
+
+Some posts can also define a legacy_path in frontmatter. For example,
+legacy_path: "improve_text_viz" generates:
+
+  improve_text_viz/index.html
+
+WeChat drafts
+-------------
+
+For a saved/exported WeChat article HTML file, run:
+
+  ruby scripts/import_wechat.rb path/to/wechat-export.html optional-slug
+
+This creates a draft Markdown file under:
+
+  content/posts/
+
+The helper extracts basic paragraphs and lists image URLs it finds. WeChat image
+handling is inconsistent, so treat the output as a draft: download or replace
+images, clean the text, then run ruby scripts/build.rb.
+
+Comments
+--------
+
+Post pages include a Firebase-powered comment widget. It is disabled until you
+configure:
+
+  assets/site/comments-config.js
+
+Create a Firebase project, then enable:
+
+  Authentication -> Sign-in method -> Google
+  Firestore Database
+
+Add your published domains to Firebase Authentication authorized domains:
+
+  alaughinghorse.github.io
+  localhost
+  127.0.0.1
+
+Paste the Firebase web app config into assets/site/comments-config.js and set:
+
+  enabled: true
+
+Deploy the Firestore rules in:
+
+  firebase/firestore.rules
+
+After your first Google sign-in, copy your Firebase Auth UID and replace
+YOUR_FIREBASE_AUTH_UID in firebase/firestore.rules. Also add that UID to
+adminUids in assets/site/comments-config.js if you want delete buttons for your
+admin account in the browser.
+
+The Firebase web config is public by design. Security depends on Firestore rules,
+not on hiding the config file.
+
+Design
+------
+
+The custom lightweight theme is in:
+
+  assets/site/styles.css
+
+The older HTML5 UP template assets are still present under assets/css,
+assets/js, assets/sass, and assets/fonts for reference, but the current pages use
+only assets/site/styles.css.
+
+Credits
+-------
+
+The previous version used Hyperspace by HTML5 UP:
+
+  html5up.net | @ajlkn
+
+Original template license text is preserved in LICENSE.txt.

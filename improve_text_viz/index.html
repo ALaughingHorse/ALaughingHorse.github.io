@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="An ensemble between part-of-speech tagging and related term search algorithms.">
+    <title>One Step Further in Visualizing Consumer Review Data | ALaughingHorse</title>
+    <link rel="stylesheet" href="../assets/site/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">ALaughingHorse</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../index.html">Home</a>
+        <a href="../blogCollection.html" aria-current="page">Writing</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../readings.html">Reading</a>
+      </nav>
+    </header>
+    <main>
+      <article class="article">
+  <header class="article-header">
+    <p class="eyebrow">Personal site</p>
+    <h1>One Step Further in Visualizing Consumer Review Data</h1>
+    <p class="article-meta">April 6, 2019 · Personal site</p>
+    <ul class="tags"><li>NLP</li><li>Visualization</li><li>Data Science</li></ul>
+  </header>
+  <div class="article-body">
+    <p>According to the latest Internet Retailer analysis of industry data by the U.S. Commerce Department, consumers spent $517.36 billion online with U.S. merchants in 2018 - 15% more than the year prior. Many believe that online retailing sites and channels have already become people&#39;s top choice when it comes to shopping. While websites like Amazon.com provide consumers with huge convenience, they also present golden opportunities for product manufacturers and consumer good companies as the volume of review data becomes abundant. As a data scientist working in the consumer product industry for Clorox, I deal with review data a lot. In this blog, I would like to share my thoughts and observations on how to improve the visualization of review data to retrieve more insightful information.</p>
+<p>Data visualization is almost always the first layer of any kind of data analysis. Today, there are many techniques and packages out there for us to make astonishing charts and plots. However, when it comes to visualizing text data, our choices suddenly become limited - bar charts, word clouds, and sometimes, word trees, all of which are based on the frequencies of word tokens. While these frequency-based visualization techniques are intuitive and easy-to-make, the information they provide is rarely satisfactory with two major drawbacks.</p>
+<h3>1. The lack of interpretability - many tokens with high frequency are hard to interpret</h3>
+<figure class="article-figure"><img src="images/unigram.png" alt="Top mentioned terms for Clorox Wipes"><figcaption>Top mentioned terms for Clorox Wipes</figcaption></figure>
+<p>As an example, the plot above shows the top 15 most used terms (with stop-words like the, a, an, etc removed) in the Amazon review of my favorite product in household cleaning, the <a href="https://www.amazon.com/Clorox-Disinfecting-Wipes-Bleach-Cleaning/dp/B00IA6IBP2/ref=sr_1_2_sspa?keywords=clorox+wipes+bleach+free&amp;qid=1554506986&amp;s=pantry&amp;sr=8-2-spons&amp;psc=1">Clorox disinfecting wipes</a>. While word or tokens like &quot;t&quot; are basically impossible to interpret in the first place, it is also tricky to understand customer feedback from tokens like “wipe&quot;, &quot;get&quot; and &quot;one.&quot; What are they talking about exactly? Sometimes we could improve the results by adding additional stop-words dynamically (stop words based on product names and descriptions) or by choosing a better tokenizing algorithm, which could prevent tokens like &quot;t&quot; from appearing as popular terms (The token &quot;t&quot; is very likely a part of &quot;don&#39;t&quot; or &quot;doesn&#39;t&quot;. The preprocessing algorithm treated it as a separate token after removing punctuation). However, it is hard to find a universal solution that makes every token interpretable.</p>
+<h3>2. The lack of context - Tokens in isolation sometimes result in ambiguity and superficial information.</h3>
+<figure class="article-figure"><img src="images/bi_gram.png" alt="Bi-gram"><figcaption>Bi-gram</figcaption></figure>
+<p>In the same example above, terms like “good”, “love”, “bathroom” seem to be informative. It is intuitive to understand them as in “The product is good,” “I love it” and “they are good for cleaning bathrooms.” However, those terms are also possible to appear in totally opposite scenarios. The user could be saying “This product is not good,” “I love the XYZ wipe better than these” or “they are not suitable for bathrooms.” More importantly, assuming our intuition for the terms are correct (that the consumers are indeed praising our products), the information that the tokens itself can provide is always limited. Sure, the consumers talk about “product” 410 times, but what about the product? The term “work” is used 239 times, but what is working? What is not working? While the problem of ambiguity could be potentially resolved by switching from uni-gram to n-gram (that is, count frequencies of token combinations instead of single tokens), or use a <a href="https://www.jasondavies.com/wordtree/">word tree</a>, it seems that the problem of the lack of depth is in the nature of vanilla frequency based visualizations. So how can we improve the frequency based visualizations so that it can get us more insights?</p>
+<h2>Utilize Part-of-Speech Tagging</h2>
+<p>To gain more insights, we first need additional information on the reviews other than the text contents themselves. In my experience tackling text data, I find Part-of-Speech (POS) of the reviews extremely helpful.</p>
+<p>Part-of-speech (POS) is a category to which a word is assigned in accordance with its syntactic functions i.e. Nouns, Verbs, Adjectives, etc. When we think about the user reviews towards a certain product together with the part-of-speech components of text, it shouldn’t be surprising that the terms or tokens which provide the most insightful information are very likely found as Nouns or Adjectives. Nouns help explain the “What” question (what are the consumer talking about the product, the subjects. It could be packaging, delivery, smell, etc), while adjectives help with the “what about” question. (What about packaging; what about delivery; what about the smell). For tens of thousands of user reviews, we get the part-of-speech for each token in each review through a method called “Part-of-speech tagging.”</p>
+<p>Part-of-speech tagging is a classic research topic on text analysis,and relevant techniques are rather mature today. One of the most popular approaches to performing the POS tagging would be the Hidden Markov Models and its variants. In summary, a Hidden Markov Model generates the part-of-speech tags by calculating the <strong>Emission Probability</strong> and the <strong>Transition Probability</strong> of each possible permutations of tags in the training data. Then it decides the “correct” set of tags based on maximum likelihood. For example, consider the sentence “I hate this product” and the set of part-of-speech tags [N, V, Adj, N], the Emission Probabilities are:</p>
+<p>P(term “i” is used as a noun), P(term “hate” is used as a verb), P(term ‘this’ is used as an adjective), and P(term “product” is used as a noun).</p>
+<p>The Transition Probability is:</p>
+<p>P(A sentence starts with a noun) * P(A verb follows a noun) * P(An adjective follows a verb) * P(A noun follows an adjective) * P(A sentence ends with a noun).</p>
+<p>Eventually, we multiply all the probabilities above together to get the final probability of the sentence “I hate this product” gets the tag [N, V, Adj, N]. If this probability is higher than all other possible permutations of tags, the model will then classify [N, V, Adj, N] as the correct label for this sentence. Although this sounds like an overwhelming amount of computation, it is actually not too bad in reality with the help of several algorithmic methods including Dynamic Programming (Notice that the calculation of the likelihoods is a chained multiplication, one zero in the chain results in a “zero” result. Dynamic programming takes advantage of this information). This additional layer of information provided by POS sometimes helps resolve the ambiguity problem conveniently. For example, in the top 15 most popular terms of Clorox Wipes above, the term “clean” is pretty ambiguous. We don’t know if the users are saying that the wipes make their home clean, or they are saying something like “I use this to clean my house” in more neutral sentiment. However, if we see the word “clean” in the top 15 most popular adjectives, then we know it’s the former.</p>
+<figure class="article-figure"><img src="images/top_nouns.png" alt="Top Nouns"><figcaption>Top Nouns</figcaption></figure>
+<figure class="article-figure"><img src="images/top_adjs.png" alt="Top Adjectives"><figcaption>Top Adjectives</figcaption></figure>
+<p>Below, you can find the top 15 most popular nouns and adjectives for the Clorox wipes I mentioned above. As you can see, comparing with the vanilla popular tokens, most of the terms we have in the charts below are easily interpretable.</p>
+<h2>Related Term Search</h2>
+<p>Now that we have the frequencies of Nouns and Adjectives, the next step will be to find the relationships between them to further address the lack of context problem. Specifically, for a popular noun, how can we know the top related Adjectives? Similarly for an Adjective, how can we know the top related Nouns? Knowing the related terms can potentially help us deepen the information we get from the texts, but the task itself is not as straightforward as it seems to be.</p>
+<p>Take the term “price” as an example. It is shown in the plot above as the third popular nouns, now I would like to know what about the price by looking at top related adjectives that our consumer use. Then we have a problem - how to define related? More specifically, how to construct a search algorithm that finds and displays the top related adjectives?</p>
+<figure class="article-figure"><img src="images/example3.png" alt="Example review text"></figure>
+<p>Let me use the following review as an example to help illustrate my approach:</p>
+<figure class="article-figure"><img src="images/tokenized.png" alt="Tokenized review text"></figure>
+<p>Below is the tokenized version of the reivew:</p>
+<figure class="article-figure"><img src="images/tagged.png" alt="Part-of-speech tagged review text"></figure>
+<p>Below is the review tagged with Part-of-Speech. Here I used the pos_tag function under the nltk (3.2.4) package in Python 3.6.2:</p>
+<p>In <a href="https://pythonprogramming.net/natural-language-toolkit-nltk-part-speech-tagging/">this POS tagging reference</a>, you can find what each tag represents. In this example, all you need to know is: NN, NNs stand for singular and plural nouns while JJ stands for adjectives.</p>
+<p>In this case, let’s call the term “price” as the <strong>target term</strong> as we want to get information about “price.” Within a specific review, we repeat the following steps for each occurrence of the target term.</p>
+<figure class="article-figure"><img src="images/example3.png" alt="Target term highlighted in the review"></figure>
+<ol><li>Identify the position of the target term (highlighted in yellow)</li></ol>
+<figure class="article-figure"><img src="images/example2.png" alt="Boundary terms highlighted in the review"></figure>
+<ol><li>Find the nearest terms with the same POS tag as the target term. Call them the “boundary terms” (highlighted in blue). In this case, since “price” is a noun, the boundary terms will be the nearest nouns.</li></ol>
+<figure class="article-figure"><img src="images/example1.png" alt="Related adjectives highlighted within the boundary terms"></figure>
+<ol><li>Find all the adjectives within the boundary terms and save them into a list</li></ol>
+<figure class="article-figure"><img src="images/related_1.png" alt="Top related adjectives for price"></figure>
+<p>Then we repeat the same process above with “price” as the target term for all the reviews. Eventually, we will have a list of adjectives that are potentially “related” with the term <strong>price</strong>. In this way, I am able to get the top-15 related adjectives as below:</p>
+<figure class="article-figure"><img src="images/related_2.png" alt="Top related nouns for great"></figure>
+<p>Terms like “good” and “great” are extremely popular. Which is actually true as we can find lots of reviews on Amazon that says “good price” and “great price.” This is not a complicated approach, but it seems to be very effective in helping us deepen the level of information we get. On the other hand, as in the plot above, reviewers use the term “great” a lot as an adjective, and I would like to know what is great about this product. I can repeat the process above with minor changes to obtain the following result:</p>
+<p>It seems that people think the wipe is great for the kitchen, bathroom and their houses in general; The product works great and smells great. Furthermore, with the Part-of-speech information and the related term search, we can eaily generate a table like below that provides a pretty informative summary of the entire review collections</p>
+<figure class="article-figure"><img src="images/summaryText.png" alt="Generated summary table"></figure>
+<p>While being helpful, this approach of finding related terms with part-of-speech tagging is not perfect. It is doing a greedy search within the boundary terms based on the frequency and lots of noises will be included (for example, you will see some adjectives that are obviously not used to describe the target noun). It requires a certain amount of data so that the “real” related terms can actually “stand-out.” If our goal is really to retrieve highly in-depth and comprehensive information from a large collection of text, we may want to move away from frequency counts and adopt a neural-network-based approach. For example, we could label each review with both the questions we would like to ask and the sentence within the review that contains the answer to the question, then the network can learn to extract the related sentences with respect to each question. Of course, such techniques are beyond the scope of this blog. If you are interested, <a href="https://stacks.stanford.edu/file/druid:gd576xb1833/thesis-augmented.pdf">this paper by Danqi Chen</a> from Stanford University is a great paper about neural reading comprehension.</p>
+<p>Lastly, this method I came up with is a simple &quot;add-on&quot; to text data visualization with the goal of getting more interpretable information from text. I hope it helps with your data analysis projects in practice and sparkles some thoughts and ideas when you encounter text data in the future. <a href="https://github.com/ALaughingHorse/improve_text_viz/tree/master/code">Here</a>, you can find the all related functions I wrote for the methods described above, with which you will be able to reproduce the plots I got. Unfortunately, I cannot host the review data I scraped due to regulations, so you&#39;ll need to scrap your own data to play with. Thank you very much for reading through!</p>
+  </div>
+</article>
+<section class="comments" data-comments-root data-post-id="improve-text-viz">
+  <div class="comments-header">
+    <div>
+      <p class="eyebrow">Discussion</p>
+      <h2>Comments</h2>
+    </div>
+    <div class="comments-auth">
+      <span data-comments-user>Sign in with Google to comment.</span>
+      <button type="button" data-comments-sign-in>Sign in</button>
+      <button type="button" data-comments-sign-out hidden>Sign out</button>
+    </div>
+  </div>
+  <p class="comments-status" data-comments-status>Loading comments...</p>
+  <div class="comments-list" data-comments-list></div>
+  <form class="comments-form" data-comments-form hidden>
+    <label for="comment-text">Comment</label>
+    <textarea id="comment-text" data-comments-text maxlength="3000" required></textarea>
+    <button type="submit">Post comment</button>
+  </form>
+</section>
+<script src="../assets/site/comments-config.js"></script>
+<script src="../assets/site/comments.js"></script>
+
+
+    </main>
+    <footer class="site-footer">
+      <p>Built as a lightweight static site. Content lives in <code>content/site.json</code>.</p>
+      <p>Original visual template: <a href="https://html5up.net">HTML5 UP</a>. Icons by Flaticon contributors.</p>
+    </footer>
+  </body>
+</html>

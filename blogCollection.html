@@ -1,89 +1,54 @@
-<!DOCTYPE HTML>
-<!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>BlogCollection</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Personal writing, data science projects, and reading notes.">
+    <title>Writing | ALaughingHorse</title>
+    <link rel="stylesheet" href="assets/site/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html">ALaughingHorse</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="blogCollection.html" aria-current="page">Writing</a>
+        <a href="projects.html">Projects</a>
+        <a href="readings.html">Reading</a>
+      </nav>
+    </header>
+    <main>
+      <section class="page-title">
+  <p class="eyebrow">Writing archive</p>
+  <h1>Blogs</h1>
+  <p>Posts can come from this site, Medium, or WeChat. Add new entries in <code>content/site.json</code>, or use the WeChat import helper to create a draft.</p>
+</section>
+<section class="grid two">
+  <article class="card">
+  <div class="card-meta">Personal site</div>
+  <h2><a href="posts/improve-text-viz/">One Step Further in Visualizing Consumer Review Data</a></h2>
+  <p>An ensemble between part-of-speech tagging and related term search algorithms.</p>
+  <ul class="tags"><li>NLP</li><li>Visualization</li><li>Data Science</li></ul>
+</article>
+<article class="card">
+  <div class="card-meta">Towards Data Science</div>
+  <h2><a href="https://towardsdatascience.com/dimensionality-reduction-with-latent-dirichlet-allocation-8d73c586738c?source=friends_link&amp;sk=33d55ed2720189d2e2f804c85b7b2dac">Dimensionality-Reduction with Latent Dirichlet Allocation</a></h2>
+  <p>Reduce the dimension of training data by over 99.7% with less than a 3% drop in performance.</p>
+  <ul class="tags"><li>NLP</li><li>Machine Learning</li><li>LDA</li></ul>
+</article>
+<article class="card">
+  <div class="card-meta">Towards Data Science</div>
+  <h2><a href="https://towardsdatascience.com/how-to-generate-summaries-for-review-text-without-neural-networks-568f14dbe835?source=friends_link&amp;sk=1e9b6acc8c294922ce43acc56682c6df">How to Generate Summaries for Review Text Without Neural Networks</a></h2>
+  <p>Getting interpretable keywords with related terms to understand consumer reviews.</p>
+  <ul class="tags"><li>NLP</li><li>Text Mining</li><li>Reviews</li></ul>
+</article>
 
-		<!-- Header -->
-			<header id="header">
-				<a href="index.html" class="title">Blogs</a>
-				<nav>
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="blogCollection.html" class="active">Blogs</a></li>
-						<li><a href="projects.html">Projects</a></li>
-						<li><a href="readings.html">Readings</a></li>
-					</ul>
-				</nav>
-			</header>
+</section>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				<!-- Main -->
-                <section id="two" class="wrapper style2 spotlights">
-                    <div class="inner">
-                        <h2>Collection of Blogs</h2>
-                        <div class="features">
-                            <section>
-                                <span class="icon major fa-code"></span>
-                                <h3>One Step Further in Visualizing Consumer Review Data</h3>
-                                <p>An ensemble between part of speech tagging and related term search algorithm</p>
-                                <ul class="actions">
-                                    <li><a href="https://alaughinghorse.github.io/improve_text_viz/" class="button">Learn more</a></li>
-                                </ul>
-							</section>
-							
-							<section>
-                                <span class="icon major fa-lock"></span>
-                                <h3>Dimensionality-Reduction with Latent Dirichlet Allocation</h3>
-                                <p>Reduce the dimension of training data by over 99.7% with only less than 3% drop in performance.</p>
-                                <ul class="actions">
-                                    <li><a href="https://towardsdatascience.com/dimensionality-reduction-with-latent-dirichlet-allocation-8d73c586738c?source=friends_link&sk=33d55ed2720189d2e2f804c85b7b2dac" class="button">Learn more</a></li>
-                                </ul>
-                            </section>
-                            <section>
-                                <span class="icon major fa-cog"></span>
-                                <h3>How to Generate “Summaries” for Review Text Without Neural Networks</h3>
-                                <p>Getting interpretable keywords with related terms to understand consumer reviews</p>
-                                <ul class="actions">
-                                    <li><a href="https://towardsdatascience.com/how-to-generate-summaries-for-review-text-without-neural-networks-568f14dbe835?source=friends_link&sk=1e9b6acc8c294922ce43acc56682c6df" class="button">Learn more</a></li>
-                                </ul>
-                            </section>
-							
-                        </div>
-                    </div>
-                </section>
-
-			</div>
-
-		<!-- Footer -->
-			<footer id="footer" class="wrapper alt">
-				<div class="inner">
-					<ul class="menu">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</div>
-			</footer>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+    </main>
+    <footer class="site-footer">
+      <p>Built as a lightweight static site. Content lives in <code>content/site.json</code>.</p>
+      <p>Original visual template: <a href="https://html5up.net">HTML5 UP</a>. Icons by Flaticon contributors.</p>
+    </footer>
+  </body>
 </html>

@@ -1,0 +1,113 @@
+{
+  "site": {
+    "title": "ALaughingHorse",
+    "name": "Xiao (Marshal) Ma",
+    "description": "Personal writing, data science projects, and reading notes.",
+    "intro": [
+      "Hi there. I am Xiao (Marshal) Ma, a UC Berkeley alum and data scientist. This site collects my writing, programming projects, and reading notes.",
+      "The name ALaughingHorse comes from my Chinese name, Ma Xiao, which can be read as horse laugh or horse roar. It is a strange little translation, but it fits my personality."
+    ],
+    "links": [
+      {
+        "label": "Writing",
+        "href": "blogCollection.html"
+      },
+      {
+        "label": "Projects",
+        "href": "projects.html"
+      },
+      {
+        "label": "Reading",
+        "href": "readings.html"
+      }
+    ]
+  },
+  "posts": [
+    {
+      "title": "Dimensionality-Reduction with Latent Dirichlet Allocation",
+      "description": "Reduce the dimension of training data by over 99.7% with less than a 3% drop in performance.",
+      "url": "https://towardsdatascience.com/dimensionality-reduction-with-latent-dirichlet-allocation-8d73c586738c?source=friends_link&sk=33d55ed2720189d2e2f804c85b7b2dac",
+      "source": "Towards Data Science",
+      "tags": ["NLP", "Machine Learning", "LDA"]
+    },
+    {
+      "title": "How to Generate Summaries for Review Text Without Neural Networks",
+      "description": "Getting interpretable keywords with related terms to understand consumer reviews.",
+      "url": "https://towardsdatascience.com/how-to-generate-summaries-for-review-text-without-neural-networks-568f14dbe835?source=friends_link&sk=1e9b6acc8c294922ce43acc56682c6df",
+      "source": "Towards Data Science",
+      "tags": ["NLP", "Text Mining", "Reviews"]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Text Tokenizer XM",
+      "description": "A Python package that provides a convenient pipeline for text data preprocessing.",
+      "url": "https://pypi.org/project/tokenizer-xm/",
+      "meta": "Python package"
+    },
+    {
+      "title": "Context Searching",
+      "description": "A Python package that helps you understand the context of unigram results from bag-of-words analysis.",
+      "url": "https://pypi.org/project/contextSearching/",
+      "meta": "Python package"
+    }
+  ],
+  "readings": [
+    {
+      "title": "Steve Jobs",
+      "author": "Walter Isaacson",
+      "period": "Oct 2018 - Feb 2020",
+      "notes": [
+        "A detailed biography of Steve Jobs, from childhood through the end of his life.",
+        "The book made me think about conviction, compromise, and the cost of stubbornness. I admired Jobs for staying with ideas he believed in even under pressure, while also seeing how the same trait created failures.",
+        "The final chapters were emotional and made me value health, time, and reflection more."
+      ]
+    },
+    {
+      "title": "Outliers: The Story of Success",
+      "author": "Malcolm Gladwell",
+      "period": "March 2019 - April 2019",
+      "notes": [
+        "Gladwell argues that extreme success is shaped not only by effort, but also by environment, culture, timing, and opportunity.",
+        "I felt the book defined success narrowly, but I agreed with the broader point that environment can deeply shape behavior and outcomes.",
+        "The Korean Air example stood out because it connects culture, communication, hierarchy, and safety."
+      ]
+    },
+    {
+      "title": "Talking To Strangers",
+      "author": "Malcolm Gladwell",
+      "period": "October 2019",
+      "notes": [
+        "The book explores why people misunderstand strangers and why communication can fail.",
+        "I did not enjoy this one as much. The central idea that people often default to truth felt intuitive, and many examples made the argument harder rather than clearer for me."
+      ]
+    },
+    {
+      "title": "Mindset",
+      "author": "Carol S. Dweck",
+      "period": "November 2019",
+      "notes": [
+        "The book explains fixed and growth mindsets, and how both can show up in everyday life.",
+        "The examples helped me notice fixed-mindset moments in myself, especially around criticism and fear of mistakes."
+      ]
+    },
+    {
+      "title": "Open Heart: A Cardiac Surgeon's Stories of Life and Death on the Operating Table",
+      "author": "Stephen Westaby",
+      "period": "December 2019 - Jan 2020",
+      "notes": [
+        "A memoir about cardiac surgery, heart transplants, and artificial hearts.",
+        "The medical vocabulary was challenging, but the stories were eye-opening. One idea stayed with me: surgery can be a daily routine for the surgeon and a once-in-a-lifetime crisis for the patient.",
+        "That contrast made me think about empathy, trust, and communication in high-stakes relationships."
+      ]
+    },
+    {
+      "title": "The Power of Habit",
+      "author": "Charles Duhigg",
+      "period": "December 2019 - Now",
+      "notes": [
+        "Notes pending."
+      ]
+    }
+  ]
+}

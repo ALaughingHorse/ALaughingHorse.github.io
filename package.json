@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "build": "ruby scripts/build.rb",
+    "compose": "ruby scripts/admin_server.rb",
+    "import:wechat": "ruby scripts/import_wechat.rb"
+  }
+}
