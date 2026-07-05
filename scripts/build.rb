@@ -247,7 +247,7 @@ def home_page
         </div>
       </div>
       <figure class="portrait">
-        <img src="images/self.JPG" alt="#{h(DATA["site"]["name"])}">
+        <img src="images/self.jpeg" alt="#{h(DATA["site"]["name"])}">
       </figure>
     </section>
     <section class="section">
